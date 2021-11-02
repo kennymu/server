@@ -47,12 +47,6 @@ locals {
       identity               = "$var.identity-ubuntu"
       subnet_id              = var.subnet_id
       vpc_security_group_ids = var.vpc_security_group_ids
-    },
-    server-nginx = {
-      server_os              = "ubuntu_20_04"
-      identity               = "$var.identity-ubuntu"
-      subnet_id              = var.subnet_id
-      vpc_security_group_ids = var.vpc_security_group_ids
     }
   }
 }
