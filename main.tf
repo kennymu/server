@@ -55,6 +55,7 @@ locals {
       vpc_security_group_ids = var.vpc_security_group_ids
   }
 }
+}
 
 provider "aws" {
   access_key = var.access_key
