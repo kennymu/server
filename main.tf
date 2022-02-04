@@ -5,6 +5,7 @@ provider "aws" {
 }
 
 module "server" {
+  count                  = 2
   source                 = "app.terraform.io/example-org-5dcc43/server/aws"
   version                = "0.0.3"
   ami                    = var.ami
@@ -13,8 +14,8 @@ module "server" {
   identity               = var.identity
 }
 
-variable bucket {}
-variable acl {}
+variable "bucket" {}
+variable "acl" {}
 
 module "s3-bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
@@ -29,10 +30,10 @@ module "s3-bucket" {
 }
 
 output "public_ip" {
-  value = module.server.public_ip
+  value = module.server.*.public_ip
 }
 
 output "public_dns" {
-  value = module.server.public_dns
+  value = module.server.*.public_dns
 }
 
