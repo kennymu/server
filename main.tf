@@ -8,6 +8,7 @@ module "server" {
   count                  = 2
   source                 = "app.terraform.io/example-org-5dcc43/server/aws"
   version                = "0.0.3"
+  environment            = var.environment
   ami                    = var.ami
   subnet_id              = var.subnet_id
   vpc_security_group_ids = var.vpc_security_group_ids

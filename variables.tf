@@ -53,3 +53,7 @@ variable "vpc_security_group_ids" {
   description = "Server Security Group ID(s)"
   type        = list(any)
 }
+
+variable "environment" {
+  description = "environment to deploy to"
+}
