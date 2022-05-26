@@ -1,5 +1,5 @@
 
 
 output "my_example" {
-   value = "hello from github"
+   value = "hello from github - development"
 }
