@@ -77,25 +77,34 @@ locals {
   }
 }
 
-variable bucket {}
-variable acl {}
+resource "random_uuid" "test" {
+}
 
-module "s3-bucket" {
-  source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "2.7.0"
+locals {
+  bucket = "${random_uuid.test.result}-bucket"
+}
+variable "acl" {
+  default = "private"
+}
 
-  bucket = var.bucket
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+
+  bucket = local.bucket
   acl    = var.acl
 
   versioning = {
     enabled = true
   }
+
 }
 
 module "server" {
-  source                 = "./server"
-  for_each               = local.servers
-  server_os              = each.value.server_os
+  source   = "app.terraform.io/example-org-580a9f/server/aws"
+  version  = "0.0.3"
+  for_each = local.servers
+  # server_os              = each.value.server_os
+  ami                    = var.ami
   identity               = each.value.identity
   subnet_id              = each.value.subnet_id
   vpc_security_group_ids = each.value.vpc_security_group_ids
